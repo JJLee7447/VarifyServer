@@ -13,3 +13,24 @@ npm install uuid
 npm install ioredis
 
 ```
+
+
+# run in docker 
+
+docker file
+
+```
+
+```
+
+build docker image
+
+```
+docker build -t verifyser .
+```
+
+run docker image
+
+```
+docker run -p 50051:50051 verifyser
+```
