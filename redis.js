@@ -14,7 +14,7 @@ const RedisCli = new Redis({
  * 监听错误信息
  */
 RedisCli.on("error", function (err) {
-  console.log("RedisCli connect error");
+  console.log("RedisCli connect error",err);
   RedisCli.quit();
 });
 
@@ -89,4 +89,11 @@ function Quit(){
     RedisCli.quit();
 }
 
-module.exports = {GetRedis, QueryRedis, Quit, SetRedisExpire,}
+function PrintLog(){
+    console.log('print')
+    console.log('redis host:', config_module.redis_host)
+    console.log('redis port:', config_module.redis_port)
+    console.log('redis passwd:', config_module.redis_passwd)
+}
+
+module.exports = {GetRedis, QueryRedis, Quit, SetRedisExpire, PrintLog,}
