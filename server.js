@@ -15,10 +15,11 @@ async function GetVarifyCode(call, callback) {
 
         }
         let uniqueId = query_res;
+        // 查询redis中是否存在key -> 如果不存在则生成验证码
         if(query_res ==null){
             uniqueId = uuidv4();
-            if (uniqueId.length > 4) {
-                uniqueId = uniqueId.substring(0, 4);
+            if (uniqueId.length > 6) {
+                uniqueId = uniqueId.substring(0, 6);
             } 
             let bres = await redis_module.SetRedisExpire(const_module.code_prefix+call.request.email, uniqueId,600)
             if(!bres){
