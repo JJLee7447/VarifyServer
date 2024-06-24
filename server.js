@@ -21,7 +21,7 @@ async function GetVarifyCode(call, callback) {
             if (uniqueId.length > 6) {
                 uniqueId = uniqueId.substring(0, 6);
             } 
-            let bres = await redis_module.SetRedisExpire(const_module.code_prefix+call.request.email, uniqueId,600)
+            let bres = await redis_module.SetRedisExpire(const_module.code_prefix+call.request.email, uniqueId,120)
             if(!bres){
                 callback(null, { email:  call.request.email,
                     error:const_module.Errors.RedisErr
@@ -31,7 +31,7 @@ async function GetVarifyCode(call, callback) {
         }
 
         console.log("uniqueId is ", uniqueId)
-        let text_str =  '您的验证码为'+ uniqueId +'请三分钟内完成注册'
+        let text_str =  '您的验证码为'+ uniqueId +'请两分钟内使用，过期无效。为了您的安全，请不要将验证码分享他人。'
         //发送邮件
         let mailOptions = {
             from: 'jjlee7447@163.com',
